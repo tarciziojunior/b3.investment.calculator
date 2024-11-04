@@ -1,0 +1,45 @@
+<!--<div class="form-container">
+  <h2>Preencha os dados para realizar o cálculo</h2>
+  <form [formGroup]="calcForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Valor Monetário</mat-label>
+      <input matInput formControlName="monetary" type="number" required >
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Período (Meses)</mat-label>
+      <input matInput formControlName="period" type="number" required>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Calcular</button>
+  </form>
+</div>-->
+<div class="form-container">
+  <h2>Preencha os dados para realizar o cálculo</h2>
+  <form [formGroup]="calcForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Valor Monetário</mat-label>
+      <input matInput formControlName="monetary" type="number" required min="1">
+      <mat-error *ngIf="calcForm.get('monetary')?.hasError('required')">
+        Este campo é obrigatório
+      </mat-error>
+      <mat-error *ngIf="calcForm.get('monetary')?.hasError('min')">
+        O valor deve ser maior que zero
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Período (Meses)</mat-label>
+      <input matInput formControlName="period" type="number" required min="1">
+      <mat-error *ngIf="calcForm.get('period')?.hasError('required')">
+        Este campo é obrigatório
+      </mat-error>
+      <mat-error *ngIf="calcForm.get('period')?.hasError('min')">
+        O período deve ser maior que zero
+      </mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="calcForm.invalid">
+      Calcular
+    </button>
+  </form>
+</div>
