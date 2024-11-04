@@ -1,0 +1,57 @@
+
+Aqui está o texto formatado com os passos da seção Uso ajustados e o conteúdo geral organizado para facilitar a leitura:
+
+B3 Calculadora de Juros Compostos
+Descrição
+Este projeto é uma aplicação web para calcular o investimento com base em juros compostos. A aplicação permite que o usuário informe um valor monetário positivo e um prazo em meses (maior que 1) para resgate da aplicação. Após solicitar o cálculo do investimento, a aplicação exibe o resultado bruto e o resultado líquido.
+
+Estrutura do Projeto
+Para tornar o código modular e extensível, o projeto implementa diversos padrões de design e boas práticas, incluindo:
+
+Factory Method: Seguindo o padrão GoF (Gang of Four), utilizamos o Factory Method para o cálculo de impostos. Esse padrão facilita a separação dos cálculos de impostos em classes distintas, tornando o código modular e mais fácil de manter.
+
+Dictionary para Cálculos de Impostos: Em vez de utilizar estruturas condicionais (if ou switch) para decidir qual cálculo de imposto aplicar, utilizamos um Dictionary para configurar os diferentes tipos de cálculo de imposto. Essa abordagem permite a adição e manutenção de novos tipos de impostos de maneira simplificada e extensível.
+
+FluentValidation para Validação de Entrada: Utilizamos a biblioteca FluentValidation para validar os valores de entrada. Com essa biblioteca, as regras de validação de campos estão separadas das regras de negócios, facilitando a manutenção e a legibilidade do código.
+
+Princípios SOLID
+Este projeto segue os princípios do SOLID para garantir uma arquitetura robusta e escalável:
+
+S - Princípio da Responsabilidade Única: Cada classe ou módulo tem uma única responsabilidade, tornando o código mais organizado e menos suscetível a erros.
+O - Princípio do Aberto/Fechado: O código é projetado para ser aberto para extensão, mas fechado para modificação. O uso de Dictionary e Factory Method permite que novos tipos de cálculo sejam adicionados sem modificar o código existente.
+L - Princípio de Substituição de Liskov: Implementações de classes podem substituir suas classes base sem alterar o comportamento desejado.
+I - Princípio de Segregação de Interface: As interfaces são projetadas para que os módulos dependam apenas dos métodos necessários.
+D - Princípio de Inversão de Dependência: O projeto utiliza injeção de dependência para desacoplar classes e facilitar testes e manutenção.
+Tecnologias
+Back-end: C#
+Front-end: Angular
+Instalação
+Para configurar e rodar o projeto localmente, siga as etapas abaixo:
+
+Baixar o Visual Studio: Visual Studio.
+Instalar o Angular CLI: Execute o comando abaixo no terminal para instalar o Angular CLI.
+bash
+Copiar código
+npm install -g @angular/cli
+Clonar o repositório:
+bash
+Copiar código
+git clone https://github.com/tarciziojunior/b3.investment.calculator
+Configurar o projeto: Abra o projeto no Visual Studio e siga as instruções de configuração.
+Uso
+Após configurar o ambiente, siga os passos abaixo para iniciar a aplicação e calcular o retorno de investimento:
+
+Abrir a solução: No Visual Studio, abra o arquivo b3.investment.calculator.sln.
+Iniciar o servidor: No Visual Studio, execute o projeto b3.investment.calculator.Server. Isso iniciará uma API para o cálculo de juros compostos.
+Abrir o terminal do cliente: No Visual Studio, clique com o botão direito no projeto b3.investment.calculator.client e selecione a opção "Abrir no terminal".
+Executar o cliente: No terminal, execute o comando:
+bash
+Copiar código
+ng serve
+Escolher opções de compilação: Após o comando anterior, selecione a opção h e depois 0 para configurar o serviço.
+Acessar a aplicação: O navegador abrirá automaticamente o aplicativo funcional. Caso isso não ocorra, acesse http://localhost:4200 para interagir com a interface e calcular o retorno do investimento.
+Contribuição
+Este projeto foi criado por Tarcizio Junior. Contribuições são bem-vindas.
+
+Licença
+Este projeto é licenciado sob a licença MIT.
