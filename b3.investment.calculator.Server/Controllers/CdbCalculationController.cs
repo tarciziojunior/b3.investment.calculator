@@ -11,7 +11,7 @@ namespace b3.investment.calculator.Server.Controllers
     public class CdbCalculationController(IInterestCalculatorService interestCalculatorService, InvestmentRequestValidator validator) : ControllerBase
     {
         [HttpPost]
-        [ProducesResponseType<int>(StatusCodes.Status200OK)]
+        [ProducesResponseType<InvestmentResponse>(StatusCodes.Status200OK)]
         public IActionResult Post([FromBody] InvestmentRequest investmentRequest)
         {
             ValidationResult validationResult = validator.Validate(investmentRequest);

@@ -43,12 +43,12 @@ export class CalculatorComponent implements OnInit {
           data: response,
         });
       },
-        (error) => {
+        (response) => {
           // Tratamento para erro 400 ou outros erros
-          if (error.status === 400) {
+          if (response.status === 400) {
             // Exemplo de mensagem de erro específica para erro 400
             this.dialog.open(ResultModalComponent, {
-              data: { messages: error.error.errors},
+              data: { messages: response.error.errors},
             });
           } else {
             // Tratamento para outros tipos de erros, se necessário
