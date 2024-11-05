@@ -43,7 +43,7 @@ Para configurar e rodar o projeto localmente, siga as etapas abaixo:
 Após configurar o ambiente, siga os passos abaixo para iniciar a aplicação e calcular o retorno de investimento:
 
 1. **Abrir a solução**: No Visual Studio, abra o arquivo `b3.investment.calculator.sln`.
-2. **Iniciar o servidor**: No Visual Studio, execute o projeto `b3.investment.calculator.Server`. Isso iniciará uma API para o cálculo de juros compostos.
+2. **Iniciar o servidor**: No Visual Studio, execute o projeto `b3.investment.calculator.Server` como http(Mudar no botão execução do projeto) . Isso iniciará uma API para o cálculo de juros compostos.
 3. **Abrir o terminal do cliente**: No Visual Studio, clique com o botão direito no projeto `b3.investment.calculator.client` e selecione a opção "Abrir no terminal".
 4. **Executar o cliente**: No terminal, execute o comando:
    ```bash
