@@ -4,6 +4,6 @@ namespace b3.investment.calculator.Server.Service.Interface
 {
     public interface IInterestCalculatorService
     {
-        InvestmentResponse InterestCalculator(decimal monetary, int months);
+        Task<InvestmentResponse> InterestCalculatorAsync(decimal monetary, int months);        
     }
 }

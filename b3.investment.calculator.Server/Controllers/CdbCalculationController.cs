@@ -12,17 +12,16 @@ namespace b3.investment.calculator.Server.Controllers
     {
         [HttpPost]
         [ProducesResponseType<InvestmentResponse>(StatusCodes.Status200OK)]
-        public IActionResult Post([FromBody] InvestmentRequest investmentRequest)
+        public  async Task<IActionResult> Post([FromBody] InvestmentRequest investmentRequest)
         {
             ValidationResult validationResult = validator.Validate(investmentRequest);
             if (!validationResult.IsValid)
             {
                 var errors = (from error in validationResult.Errors
                               select error.ErrorMessage).ToList();
-                return BadRequest(new { Errors = errors });
-                
-            }
-            return Ok(interestCalculatorService.InterestCalculator(investmentRequest.Monetary, investmentRequest.Period));
+                return BadRequest(new { Errors = errors });                
+            }            
+            return Ok(await interestCalculatorService.InterestCalculatorAsync(investmentRequest.Monetary, investmentRequest.Period));
         }
     }
 }

@@ -1,66 +1,47 @@
-﻿using b3.investment.calculator.Server.Domain.InvestmentTax;
-using b3.investment.calculator.Server.Request;
+﻿using Moq;
 using b3.investment.calculator.Server.Service;
+using b3.investment.calculator.Server.Service.Interface;
 
 namespace b3.investment.calculator.test.Service
 {
     [TestFixture]
     public class InterestCalculatorServiceTests
     {
+        private Mock<ICalculatorService> _mockCalculatorService;
         private InterestCalculatorService _interestCalculatorService;
 
         [SetUp]
         public void Setup()
         {
-            _interestCalculatorService = new InterestCalculatorService();
+            _mockCalculatorService = new Mock<ICalculatorService>();
+            _interestCalculatorService = new InterestCalculatorService(_mockCalculatorService.Object);
         }
 
         [Test]
-        public void InterestCalculator_ShouldCalculateGrossAndNetIncome_Correctly()
+        public async Task InterestCalculatorAsync_ShouldReturnExpectedInvestmentResponse()
         {
             // Arrange
-            decimal monetary = 1000m; // Valor monetário
-            int months = 12; // Meses
+            decimal monetary = 1000m;
+            int months = 12;
+            decimal expectedGross = 1100m;
+            decimal expectedNet = 1050m;
+
+            // Configura os mocks para retornar valores simulados
+            _mockCalculatorService.Setup(cs => cs.GetGrossProfitabilityAsync(monetary, months))
+                                  .ReturnsAsync(expectedGross);
+            _mockCalculatorService.Setup(cs => cs.GetNetIncomeAsync(monetary, months, expectedGross))
+                                  .ReturnsAsync(expectedNet);
 
             // Act
-            InvestmentResponse response = _interestCalculatorService.InterestCalculator(monetary, months);
+            var result = await _interestCalculatorService.InterestCalculatorAsync(monetary, months);
 
             // Assert
-            Assert.That(response, Is.Not.Null, "The InvestmentResponse should not be null.");
-            Assert.That(response.Gross, Is.GreaterThan(0), "Gross profitability should be greater than zero.");
-            Assert.That(response.Net, Is.GreaterThan(0), "Net income should be greater than zero.");
-        }
-
-        [Test]
-        public void GetGrossProfitability_ShouldReturnCorrectValue()
-        {
-            // Arrange
-            decimal monetary = 1000m; // Valor monetário
-            int months = 12; // Meses
-            decimal expectedGrossProfitability = monetary * (decimal)Math.Pow((double)(1 + InterestCalculatorService.GetTax()), months);
-
-            // Act
-            decimal result = InterestCalculatorService.GetGrossProfitability(monetary, months);
-
-            // Assert
-            Assert.That(result, Is.EqualTo(expectedGrossProfitability), "Gross profitability calculation is incorrect.");
-        }
-
-        [Test]
-        public void GetNetIncome_ShouldReturnCorrectValue()
-        {
-            // Arrange
-            decimal monetary = 1000m; // Valor monetário
-            int months = 12; // Meses
-            ITaxRate taxRate = TaxRateFactory.CreateTaxRate(months);
-            decimal grossProfit = InterestCalculatorService.GetGrossProfitability(monetary, months) - monetary;
-            decimal expectedNetIncome = monetary + taxRate.CalculateTax(grossProfit);
-
-            // Act
-            decimal result = InterestCalculatorService.GetNetIncome(monetary, months);
-
-            // Assert
-            Assert.That(result, Is.EqualTo(expectedNetIncome), "Net income calculation is incorrect.");
+            Assert.That(result, Is.Not.Null, "O resultado não deve ser nulo.");
+            Assert.Multiple(() =>
+            {
+                Assert.That(result.Gross, Is.EqualTo(expectedGross), "A rentabilidade bruta não está correta.");
+                Assert.That(result.Net, Is.EqualTo(expectedNet), "A rentabilidade líquida não está correta.");
+            });
         }
     }
 }

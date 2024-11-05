@@ -7,10 +7,14 @@ namespace b3.investment.calculator.Server.Request
         public InvestmentRequestValidator()
         {
             RuleFor(request => request.Monetary)
-                .GreaterThan(0).WithMessage(Messages.MSG_01);
+             .NotNull().WithMessage(Messages.MSG_01)
+             .GreaterThan(0).WithMessage(Messages.MSG_01)
+             .LessThanOrEqualTo(1000000).WithMessage(Messages.MSG_03); // Mensagem para limite superior
 
             RuleFor(request => request.Period)
-                .GreaterThan(0).WithMessage(Messages.MSG_02);
+                .NotNull().WithMessage(Messages.MSG_02) // Mensagem para valores nulos                
+                .GreaterThan(0).WithMessage(Messages.MSG_02)
+                .LessThanOrEqualTo(300).WithMessage(Messages.MSG_04);
         }
     }
 }

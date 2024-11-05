@@ -4,35 +4,18 @@ using b3.investment.calculator.Server.Service.Interface;
 
 namespace b3.investment.calculator.Server.Service
 {
-    public class InterestCalculatorService : IInterestCalculatorService
+    public class InterestCalculatorService(ICalculatorService calculatorService) :  IInterestCalculatorService
     {
-        private const decimal CDI = 0.009m;
-        private const decimal TB = 1.08m;
-
-        public InvestmentResponse InterestCalculator(decimal monetary, int months)
+        private readonly ICalculatorService _calculatorService = calculatorService;
+        public async Task<InvestmentResponse> InterestCalculatorAsync(decimal monetary, int months)
         {
+            var gross = await _calculatorService.GetGrossProfitabilityAsync(monetary, months);
+            var net = await _calculatorService.GetNetIncomeAsync(monetary, months, gross);
             return new InvestmentResponse
             {
-                Gross = GetGrossProfitability(monetary, months),
-                Net = GetNetIncome(monetary, months)
+                Gross = gross,
+                Net = net
             };
-        }
-        public static decimal GetGrossProfitability(decimal monetary, int months)
-        {
-            // Fórmula: A = P * (1 + i) ^ n           
-            return monetary * Convert.ToDecimal(Math.Pow((double)(1 + GetTax()), months)); 
-
-        }
-        public static decimal GetNetIncome(decimal monetary, int months)
-        {
-            ITaxRate taxRate = TaxRateFactory.CreateTaxRate(months);
-            var aux = GetGrossProfitability(monetary, months) - monetary;
-            return monetary + taxRate.CalculateTax(aux);
-        }
-
-        public static decimal GetTax()
-        {          
-            return CDI * TB;
         }
     }
 }

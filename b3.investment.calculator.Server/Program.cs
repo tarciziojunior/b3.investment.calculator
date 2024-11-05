@@ -13,6 +13,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<IInterestCalculatorService, InterestCalculatorService>();
 builder.Services.AddSingleton<InvestmentRequestValidator, InvestmentRequestValidator>();
+builder.Services.AddSingleton<ICalculatorService, CalculatorService>();
 
 // Add CORS services
 builder.Services.AddCors(options =>

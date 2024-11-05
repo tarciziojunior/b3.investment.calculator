@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { InvestmentService } from '../../core/services/investment.service';
@@ -23,8 +23,13 @@ export class CalculatorComponent implements OnInit {
     private dialog: MatDialog
   ) {
     this.calcForm = this.fb.group({
-      monetary: [null],
-      period: [null],
+      monetary: ['', [
+        Validators.required
+      ]],
+      period: ['', [
+        Validators.required,
+        Validators.pattern('^[0-9]*$') // Permitir apenas números inteiros        
+      ]],
     });
   }
 
