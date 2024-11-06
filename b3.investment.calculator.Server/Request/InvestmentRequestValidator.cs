@@ -13,7 +13,7 @@ namespace b3.investment.calculator.Server.Request
 
             RuleFor(request => request.Period)
                 .NotNull().WithMessage(Messages.MSG_02) // Mensagem para valores nulos                
-                .GreaterThan(0).WithMessage(Messages.MSG_02)
+                .GreaterThan(1).WithMessage(Messages.MSG_02)
                 .LessThanOrEqualTo(300).WithMessage(Messages.MSG_04);
         }
     }

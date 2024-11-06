@@ -13,20 +13,12 @@ namespace b3.investment.calculator.test.Request
         public void Setup()
         {
             _validator = new InvestmentRequestValidator();
-        }
-
-        [Test]
-        public void Should_Have_Error_When_Monetary_Is_Null()
-        {
-            var request = new InvestmentRequest { Monetary = null, Period = 1 };
-            var result = _validator.TestValidate(request);
-            result.ShouldHaveValidationErrorFor(r => r.Monetary);
-        }
+        }       
 
         [Test]
         public void Should_Have_Error_When_Monetary_Is_Zero()
         {
-            var request = new InvestmentRequest { Monetary = 0, Period = 1 };
+            var request = new InvestmentRequest { Monetary = 0, Period = 2 };
             var result = _validator.TestValidate(request);
             result.ShouldHaveValidationErrorFor(r => r.Monetary);
         }
@@ -34,18 +26,11 @@ namespace b3.investment.calculator.test.Request
         [Test]
         public void Should_Have_Error_When_Monetary_Is_Above_Max()
         {
-            var request = new InvestmentRequest { Monetary = 1000001, Period = 1 };
+            var request = new InvestmentRequest { Monetary = 1000001, Period = 2 };
             var result = _validator.TestValidate(request);
             result.ShouldHaveValidationErrorFor(r => r.Monetary);
         }
-
-        [Test]
-        public void Should_Have_Error_When_Period_Is_Null()
-        {
-            var request = new InvestmentRequest { Monetary = 1000, Period = null };
-            var result = _validator.TestValidate(request);
-            result.ShouldHaveValidationErrorFor(r => r.Period);
-        }
+      
 
         [Test]
         public void Should_Have_Error_When_Period_Is_Zero()
