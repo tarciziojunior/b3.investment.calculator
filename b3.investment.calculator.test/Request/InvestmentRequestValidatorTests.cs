@@ -1,6 +1,5 @@
 ﻿using FluentValidation.TestHelper;
 using b3.investment.calculator.Server.Request;
-using b3.investment.calculator.Server;
 
 namespace b3.investment.calculator.test.Request
 {

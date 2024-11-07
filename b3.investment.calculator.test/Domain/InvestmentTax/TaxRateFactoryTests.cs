@@ -20,7 +20,7 @@ namespace b3.investment.calculator.test.Domain.InvestmentTax
             ITaxRate taxRate = TaxRateFactory.CreateTaxRate(months);
 
             // Assert
-            Assert.IsInstanceOf<TaxRateUpTo6Months>(taxRate, "Expected a TaxRateUpTo6Months instance.");
+            Assert.That(taxRate, Is.InstanceOf<TaxRateUpTo6Months>(), "Expected a TaxRateUpTo6Months instance.");
         }
 
         [Test]
@@ -33,7 +33,7 @@ namespace b3.investment.calculator.test.Domain.InvestmentTax
             ITaxRate taxRate = TaxRateFactory.CreateTaxRate(months);
 
             // Assert
-            Assert.IsInstanceOf<TaxRateUpTo12Months>(taxRate, "Expected a TaxRateUpTo12Months instance.");
+            Assert.That(taxRate, Is.InstanceOf<TaxRateUpTo12Months>(), "Expected a TaxRateUpTo12Months instance.");
         }
 
         [Test]
@@ -46,7 +46,7 @@ namespace b3.investment.calculator.test.Domain.InvestmentTax
             ITaxRate taxRate = TaxRateFactory.CreateTaxRate(months);
 
             // Assert
-            Assert.IsInstanceOf<TaxRateUpTo24Months>(taxRate, "Expected a TaxRateUpTo24Months instance.");
+            Assert.That(taxRate, Is.InstanceOf<TaxRateUpTo24Months>(), "Expected a TaxRateUpTo24Months instance.");
         }
 
         [Test]
@@ -59,7 +59,7 @@ namespace b3.investment.calculator.test.Domain.InvestmentTax
             ITaxRate taxRate = TaxRateFactory.CreateTaxRate(months);
 
             // Assert
-            Assert.IsInstanceOf<TaxRateAbove24Months>(taxRate, "Expected a TaxRateAbove24Months instance.");
+            Assert.That(taxRate, Is.InstanceOf<TaxRateAbove24Months>(), "Expected a TaxRateAbove24Months instance.");
         }
     }
 }

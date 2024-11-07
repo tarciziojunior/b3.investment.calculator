@@ -27,7 +27,7 @@ namespace b3.investment.calculator.test.Service
             decimal expectedGross = monetary * Convert.ToDecimal(Math.Pow(1 + tax, months));
 
             // Assert
-            Assert.That(result, Is.EqualTo(expectedGross), "A rentabilidade bruta não está correta.");
+            Assert.That(result, Is.EqualTo(expectedGross), "Gross profitability is not correct.");
         }
 
         [Test]
@@ -44,7 +44,7 @@ namespace b3.investment.calculator.test.Service
 
             // Assert
             decimal expectedNetIncome = monetary + expectedTax;
-            Assert.That(result, Is.EqualTo(expectedNetIncome), "A renda líquida não está correta.");
+            Assert.That(result, Is.EqualTo(expectedNetIncome), "Net income is not correct.");
         }
     }
 }

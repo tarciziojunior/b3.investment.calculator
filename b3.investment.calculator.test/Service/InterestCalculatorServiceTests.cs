@@ -36,11 +36,11 @@ namespace b3.investment.calculator.test.Service
             var result = await _interestCalculatorService.InterestCalculatorAsync(monetary, months);
 
             // Assert
-            Assert.That(result, Is.Not.Null, "O resultado não deve ser nulo.");
+            Assert.That(result, Is.Not.Null, "The result must not be null");
             Assert.Multiple(() =>
             {
-                Assert.That(result.Gross, Is.EqualTo(expectedGross), "A rentabilidade bruta não está correta.");
-                Assert.That(result.Net, Is.EqualTo(expectedNet), "A rentabilidade líquida não está correta.");
+                Assert.That(result.Gross, Is.EqualTo(expectedGross), "Gross profitability is not correct.");
+                Assert.That(result.Net, Is.EqualTo(expectedNet), "Net profitability is not correct.");
             });
         }
     }
